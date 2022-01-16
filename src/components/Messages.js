@@ -2,15 +2,16 @@ import { Component } from "react";
 import React from "react";
 
 class Messages extends Component {
-  renderMessage(message) {
+  renderMessage(message, index) {
     const { member, text } = message;
     const { currentMember } = this.props;
     const messageFromMe = member.id === currentMember.id;
     const className = messageFromMe
       ? "Messages-message currentMember"
       : "Messages-message";
+      console.log(index)
     return (
-      <li className={className}>
+      <li key={index} className={className}>
         <span
           className="avatar"
           style={{backgroundColor: member.color}}
@@ -24,9 +25,10 @@ class Messages extends Component {
   }
   render() {
     const { messages } = this.props;
+    console.log(this.props)
     return (
       <ul className="Messages-list">
-        {messages.map((m) => this.renderMessage(m))}
+        {messages.map((m, index) => this.renderMessage(m, index))}
       </ul>
     );
   }

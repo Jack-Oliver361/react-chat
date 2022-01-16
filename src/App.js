@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Messages from "./components/Messages";
+import Input from "./components/Input"
 import React, { Component } from 'react';
 
 function randomName() {
@@ -30,11 +31,22 @@ class App extends Component {
       color: randomColor()
     }
   }
-
+  onSendMessage = (message) => {
+    const messages = this.state.messages
+    messages.push({
+      text: message,
+      member: this.state.member
+    })
+    this.setState({messages: messages})
+  }
   render(){
     return (
       <div className='App'>
+        <div className='App-header'>
+          <h1>React Chat</h1>
+        </div>
         <Messages messages={this.state.messages} currentMember={this.state.member} />
+        <Input onSendMessage={this.onSendMessage} />
       </div>
     );
   }
